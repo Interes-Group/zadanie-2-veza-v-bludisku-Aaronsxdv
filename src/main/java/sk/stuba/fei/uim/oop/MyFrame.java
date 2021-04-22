@@ -12,17 +12,30 @@ import java.util.Random;
 public class MyFrame extends JFrame{
     JFrame frame;
     int wins;
-    int msize_x = 11;
+    int msize_x = 11; //Maze size
     int msize_y = 11;
     Maze myMaze = new Maze(msize_x, msize_y);
     Player myPlayer = new Player(1,1,myMaze);
-    int fin_x = msize_x;
+    int fin_x = msize_x;  //Maze exit point
     int fin_y = msize_y;
+    JButton b1=new JButton("\uD83E\uDC15"); //UP
+    JButton b2=new JButton("\uD83E\uDC17"); //DOWN
+    JButton b3=new JButton("\uD83E\uDC14"); //LEFT
+    JButton b4=new JButton("\uD83E\uDC16"); //RIGHT
+    JLabel win = new JLabel();                  //WINS
     public MyFrame(int win_count){
         this.wins = win_count;
         this.frame = new JFrame("Maze runner v0.1");
     }
-
+    void init_buttons(JButton b1,JButton b2,JButton b3,JButton b4){
+        b1.addActionListener((ActionListener) new DirectionButton(0,-1,this.myPlayer));
+        b2.addActionListener((ActionListener) new DirectionButton(0,1,this.myPlayer));
+        b3.addActionListener((ActionListener) new DirectionButton(-1,0,this.myPlayer));
+        b4.addActionListener((ActionListener) new DirectionButton(1,0,this.myPlayer));
+    }
+    void init_label(JLabel win,int x){
+        win.setText("Wins: "+x);
+    }
     void call() {
 
         frame.setBounds(0, 0, 475, 600);
@@ -31,13 +44,11 @@ public class MyFrame extends JFrame{
 
         ImageIcon image = new ImageIcon("src/logo.png");
         frame.setIconImage(image.getImage());
-        JButton b1=new JButton("\uD83E\uDC15"); //UP
-        JButton b2=new JButton("\uD83E\uDC17"); //DOWN
-        JButton b3=new JButton("\uD83E\uDC14"); //LEFT
-        JButton b4=new JButton("\uD83E\uDC16"); //RIGHT
+
         JButton reset =new JButton("RESET");
         JButton disp=new JButton("PLAYER");
         reset.setBounds(70,470,95,30);
+        win.setBounds(275,470,95,30);
         b1.setBounds(170,470,95,30);
         b2.setBounds(170,510,95,30);
         b3.setBounds(70,510,95,30);
@@ -89,13 +100,11 @@ public class MyFrame extends JFrame{
             }
 
         };
-
-        b1.addActionListener((ActionListener) new DirectionButton(0,-1,myPlayer));
-        b2.addActionListener((ActionListener) new DirectionButton(0,1,myPlayer));
-        b3.addActionListener((ActionListener) new DirectionButton(-1,0,myPlayer));
-        b4.addActionListener((ActionListener) new DirectionButton(1,0,myPlayer));
+        init_label(this.win,0);
+        init_buttons(this.b1,this.b2,this.b3,this.b4);
         reset.addActionListener((ActionListener) new ResetButton(this));
         //disp.addActionListener((ActionListener) new Displayer(myPlayer));
+        frame.add(win);
         frame.add(reset);
         frame.add(b1);
         frame.add(b2);
@@ -144,12 +153,15 @@ public class MyFrame extends JFrame{
 
         frame.setVisible(true);
         while(myPlayer.x != fin_x || myPlayer.y != fin_y){
+
             frame.repaint();
             if(myPlayer.x == fin_x && myPlayer.y == fin_y){
-                //System.out.printf("\nYOU WIN!Win count:%d\n",this.wins+1);
                 myMaze = new Maze(msize_x, msize_y);
                 myPlayer = new Player(1,1,myMaze);
-                frame.repaint();
+                init_buttons(this.b1,this.b2,this.b3,this.b4);
+                this.wins++;
+                init_label(this.win,this.wins);
+
             }
         }
 

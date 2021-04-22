@@ -19,8 +19,9 @@ public class ResetButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.myframe.myMaze = new Maze(11,11);
         this.myframe.myPlayer = new Player(1,1,this.myframe.myMaze);
-        //this.myframe.call();
-
+        this.myframe.init_buttons(this.myframe.b1,this.myframe.b2,this.myframe.b3,this.myframe.b4);
+        this.myframe.wins = 0;
+        this.myframe.init_label(this.myframe.win,this.myframe.wins);
 
     }
 }

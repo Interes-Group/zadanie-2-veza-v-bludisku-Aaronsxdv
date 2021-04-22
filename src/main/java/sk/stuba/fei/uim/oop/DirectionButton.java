@@ -14,6 +14,7 @@ public class DirectionButton implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+
         //System.out.printf("Player - x:%d,y:%d, Stepped_cell - x:%d,y:%d",this.playerx.)
         if(this.xm == 1){
             if(!(this.playerx.maze.cells[this.playerx.x-1][this.playerx.y-1].walls[1]) && !(this.playerx.maze.cells[this.playerx.x+this.xm-1][this.playerx.y+this.ym-1].walls[3])){
