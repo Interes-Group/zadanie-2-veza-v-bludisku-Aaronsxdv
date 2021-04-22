@@ -278,42 +278,22 @@ public class MyFrame extends JFrame{
                 switch (keyCode){
                     case KeyEvent.VK_UP:
                         new ArrowKeys(0,-1,myPlayer);
-                        for(int i=0;i<avail_pos.size();i++){
-                            if(avail_pos.get(i) != null){
-                                System.out.printf("Position %d = x:%d,y:%d\n",i,avail_pos.get(i).x,avail_pos.get(i).y);
-                            }
 
-                        }
                         //System.out.println("Up key!");
                         break;
                     case KeyEvent.VK_DOWN:
                         new ArrowKeys(0,1,myPlayer);
-                        for(int i=0;i<avail_pos.size();i++){
-                            if(avail_pos.get(i) != null){
-                                System.out.printf("Position %d = x:%d,y:%d\n",i,avail_pos.get(i).x,avail_pos.get(i).y);
-                            }
 
-                        }
                         //System.out.println("Down key!");
                         break;
                     case KeyEvent.VK_RIGHT:
                         new ArrowKeys(1,0,myPlayer);
-                        for(int i=0;i<avail_pos.size();i++){
-                            if(avail_pos.get(i) != null){
-                                System.out.printf("Position %d = x:%d,y:%d\n",i,avail_pos.get(i).x,avail_pos.get(i).y);
-                            }
 
-                        }
                         //System.out.println("Up key!");
                         break;
                     case KeyEvent.VK_LEFT:
                         new ArrowKeys(-1,0,myPlayer);
-                        for(int i=0;i<avail_pos.size();i++){
-                            if(avail_pos.get(i) != null){
-                                System.out.printf("Position %d = x:%d,y:%d\n",i,avail_pos.get(i).x,avail_pos.get(i).y);
-                            }
 
-                        }
                         //System.out.println("Down key!");
                         break;
                 }
