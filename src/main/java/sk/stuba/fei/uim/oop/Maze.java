@@ -58,7 +58,8 @@ public class Maze {
 }
 
 class Cell {
-
+    List<Cell> neighbors = new ArrayList<>();
+    boolean isSelected = false;
     private Maze maze;
     int x, y;
     private boolean visited = false;
@@ -72,38 +73,38 @@ class Cell {
     }
 
     public Cell pickNext() {
-        List<Cell> neighbors = new ArrayList<>();
+
         if (this.y != 0){
-            neighbors.add(this.maze.getCell(this.x, this.y - 1));
+            this.neighbors.add(this.maze.getCell(this.x, this.y - 1));
         }
         else{
-            neighbors.add(null);
+            this.neighbors.add(null);
         };
         if (this.x != this.maze.sizeX - 1){
-            neighbors.add(this.maze.getCell(this.x + 1, this.y));
+            this.neighbors.add(this.maze.getCell(this.x + 1, this.y));
         }
         else{
-            neighbors.add(null);
+            this.neighbors.add(null);
         };
         if (this.y != this.maze.sizeY - 1){
-            neighbors.add(this.maze.getCell(this.x, this.y + 1));
+            this.neighbors.add(this.maze.getCell(this.x, this.y + 1));
         }
         else{
-            neighbors.add(null);
+            this.neighbors.add(null);
         };
         if (this.x != 0){
-            neighbors.add(this.maze.getCell(this.x - 1, this.y));
+            this.neighbors.add(this.maze.getCell(this.x - 1, this.y));
         }
         else{
-            neighbors.add(null);
+            this.neighbors.add(null);
         };
 
         boolean hasUnvisitedNeighbor = false;
-        /*for (Cell c : neighbors) {
+        /*for (Cell c : this.neighbors) {
             if (c == null) continue;
             if (!c.isVisited()) hasUnvisitedNeighbor = true;
         }*/
-        for (Cell neighbor : neighbors) {
+        for (Cell neighbor : this.neighbors) {
             if (neighbor == null) {
                 continue;
             }
@@ -116,27 +117,13 @@ class Cell {
         if (hasUnvisitedNeighbor) {
 
             int random = (int) Math.floor(Math.random() * 4);
-            Cell next = neighbors.get(random);
+            Cell next = this.neighbors.get(random);
             while (next == null || next.isVisited()) {
                 random = (int) Math.floor(Math.random() * 4);
-                next = neighbors.get(random);
+                next = this.neighbors.get(random);
             }
             this.breakWall(random);
             next.breakWall((random + 2) % 4);
-
-            /*System.out.printf("Neighbors of x:%d,y:%d :\n",this.x,this.y);
-            for(int i = 0;i<4;i++){
-                if(neighbors.get(i) == null){
-                    System.out.printf("Neighbor %d is null\n",i);
-                }
-                else{
-                    System.out.printf("Neighbor %d is x:%d,y:%d\n",i,neighbors.get(i).x,neighbors.get(i).y);
-                }
-
-            }
-            System.out.print("\n");
-
-            System.out.printf("Breaking a wall between 1 - x:%d,y:%d,wall_n: %d and 2 - x:%d,y:%d,wall_n: %d\n",this.x,this.y,random,next.x,next.y,((random + 2) % 4));*/
             return next;
         } else return this.maze.backtrack();
     }

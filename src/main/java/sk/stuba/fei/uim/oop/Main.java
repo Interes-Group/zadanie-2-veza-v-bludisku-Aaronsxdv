@@ -16,12 +16,10 @@ import java.net.*;
 import java.util.*;
 
 public class Main extends JFrame{
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args)  {
         MyFrame myframe = new MyFrame(0);
         myframe.call();
-        myframe.dispose();
-        MyFrame myframe2 = new MyFrame(0);
-        myframe2.call();
+
 
 
     }
