@@ -91,7 +91,7 @@ public class MyFrame extends JFrame{
 
 
         frame.setBounds(0, 0, 475, 600);
-
+        //frame.setLayout(new GridLayout(3, 4));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ImageIcon image = new ImageIcon("src/logo.png");
@@ -99,15 +99,9 @@ public class MyFrame extends JFrame{
 
         JButton reset =new JButton("RESET");
         JButton disp=new JButton("PLAYER");
-        reset.setBounds(70,470,95,30);
-        win.setBounds(275,470,95,30);
-        b1.setBounds(170,470,95,30);
-        b2.setBounds(170,510,95,30);
-        b3.setBounds(70,510,95,30);
-        b4.setBounds(275,510,95,30);
-        disp.setBounds(700,180,200,30);
 
-
+        JPanel panel2 = new JPanel();
+        panel2.setLayout(new GridLayout(2,3));
         JPanel panel = new JPanel() {
             Graphics2D g2;
 
@@ -253,13 +247,14 @@ public class MyFrame extends JFrame{
 
 
         });
-        frame.add(win);
-        frame.add(reset);
-        frame.add(b1);
-        frame.add(b2);
-        frame.add(b3);
-        frame.add(b4);
-
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(panel2,BorderLayout.SOUTH);
+        panel2.add(win);
+        panel2.add(b1);
+        panel2.add(reset);
+        panel2.add(b3);
+        panel2.add(b2);
+        panel2.add(b4);
         frame.setFocusable(true);
         panel.setFocusable(true);
         b1.setFocusable(false);
@@ -267,7 +262,7 @@ public class MyFrame extends JFrame{
         b3.setFocusable(false);
         b4.setFocusable(false);
         reset.setFocusable(false);
-        frame.add(panel, BorderLayout.CENTER);
+
         frame.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
