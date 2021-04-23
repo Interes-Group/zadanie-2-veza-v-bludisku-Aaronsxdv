@@ -30,6 +30,7 @@ public class MyFrame extends JFrame{
     public MyFrame(int win_count){
         this.wins = win_count;
         this.frame = new JFrame("Maze runner v0.1");
+        call();
     }
     void init_buttons(JButton b1,JButton b2,JButton b3,JButton b4){
         b1.addActionListener((ActionListener) new DirectionButton(0,-1,this.myPlayer));
